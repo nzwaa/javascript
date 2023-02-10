@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Daftar Produk</title>
+</head>
+<body>
+    <h1>Daftar Produk</h1>
+    <form id="form-produk" action="" onsubmit="event.preventDefault(); tambahProduk(this)">
+        <input name="index" type="hidden" value="-1">
+        <div>
+            <label for="nama">Nama Produk</label>
+        </div>
+        <div>
+            <input type="text" id="nama" name="nama">
+        </div>
+        <div>
+            <label for="harga">Harga Produk</label>
+        </div>
+        <div>
+            <input type="text" id="harga" name="harga">
+        </div>
+        <div>
+            <label for="stok">Stok Produk</label>
+        </div>
+        <div>
+            <input type="text" id="stok" name="stok">
+        </div>
+        <div>
+            <label for="gambar">Link Gambar Produk</label>
+        </div>
+        <div>
+            <input type="text" id="gambar" name="gambar">
+        </div>
+        <div style="padding-top: 10px;">
+            <button id="btn-save-produk">Tambah</button>
+        </div>
+    </form>
+    <div id="daftar-produk"></div>
+
+    <script src="aplikasi-daftar-produk.js"></script>
+</body>
+</html>
