@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Aplikasi Transaksi Penjualan</title>
 </head>
 <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Daftar Produk</a></li>
+            <li><a href="kategori.html">Kategori Produk</a></li>
+            <li><a href="konsumen.html">Transaksi Penjualan</a></li>
+            <li><a href="penjualan.html">Konsumen</a></li>
+          </ul>
+        </div>
+        </nav>
+    <div class="container-fluid"> 
     <h1>Transaksi Penjualan</h1>
     <form id="form-transaksi" action="" onsubmit="event.preventDefault(); tambahTransaksi(this)">
         <input name="index" type="hidden" value="-1">
