@@ -67,7 +67,15 @@ const aplikasiDaftarProduk = {
         const componentDaftarProduk = document.getElementById('daftar-produk');
         componentDaftarProduk.innerHTML = '';
         this.daftarProduk.forEach((produk, index) => {
-            componentDaftarProduk.innerHTML += `${produk.nama} <br> ${produk.harga} <br>  ${produk.stok} <br> <img src="${produk.gambar}" width="200" height="200";> <br> <button onclick="aplikasiDaftarProduk.editProduk(${index})">Edit</button> <button onclick="aplikasiDaftarProduk.hapusProduk(${index})">Hapus</button>`;
+            componentDaftarProduk.innerHTML += `
+            <div class="flex justify-between">
+                <div> ${produk.nama} <br> ${produk.harga} <br>  ${produk.stok} <br> <img src="${produk.gambar}" width="200" height="200";> <br>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-xs mr-2" onclick="aplikasiDaftarProduk.editProduk(${index})">Edit</button>
+                        <button class="btn btn-xs btn-error" onclick="aplikasiDaftarProduk.hapusProduk(${index})">Hapus</button> 
+                    </div>
+                </div> 
+            </div>`;
         });
     },
     hapusProduk: function (index) {

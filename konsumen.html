@@ -1,147 +1,168 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="bumblebee">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Halaman Konsumen</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.50.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html">Daftar Produk</a></li>
-            <li><a href="kategori.html">Kategori Produk</a></li>
-            <li><a href="penjualan.html">Transaksi Penjualan</a></li>
-            <li><a href="konsumen.html">Konsumen</a></li>
-          </ul>
-        </div>
-        </nav>
-    <div class="container-fluid"> 
-        <h1>Konsumen</h1>
-        <form id="form-konsumen" action="" onsubmit="event.preventDefault(); tambahKonsumen(this)">
-            <input name="index" type="hidden" value="-1">
-            <div>
-                <label for="nama">Nama</label>
-            </div>
-            <div>
-                <input type="text" id="nama" name="nama">
-            </div>
-            <div>
-                <label for="alamat">Alamat</label>
-            </div>
-            <div>
-                <input type="text" id="alamat" name="alamat">
-            </div>
-            <div>
-                <label for="no">No HP</label>
-            </div>
-            <div>
-                <input type="text" id="no" name="no">
-            </div>
-            <div>
-                <label for="email">Email</label>
-            </div>
-            <div>
-                <input type="text" id="email" name="email">
-            </div>
-            <div style="padding-top: 10px;">
-                <button id="btn-save-konsumen">Simpan</button>
-            </div>
-        </form>
+    <div class="navbar bg-neutral text-neutral-content">
+        <ul class="nav navbar-nav">
+        <li><a class="btn btn-ghost normal-case text-xl" href="index.html">Daftar Produk</a></li>
+        <li><a class="btn btn-ghost normal-case text-xl" href="kategori.html">Kategori Produk</a></li>
+        <li><a class="btn btn-ghost normal-case text-xl" href="penjualan.html">Transaksi Penjualan</a></li>
+        <li><a class="btn btn-ghost normal-case text-xl" href="konsumen.html">Konsumen</a></li>
+        </ul>
     </div>
-    <h2 id="history"></h2>
-    <div id="daftar-konsumen"></div>
-        <script>
-        function tambahKonsumen(form) {  
-            console.log(form);
-            aplikasiHalamanKonsumen.inputKonsumen(form);
-            aplikasiHalamanKonsumen.menampilkanHalamanKonsumen();
-        }
+    <div class="container mx-auto">
+        <div class="flex justify-center gap-5">
+            <div class="card w-96 bg-base-100 shadow-xl">
+                <form id="form-konsumen" action="" onsubmit="event.preventDefault(); tambahKonsumen(this)">
+                    <div class="card-body">
+                        <h2 class="card-title">Konsumen</h2>
+                        <p>
+                            <input name="index" type="hidden" value="-1">
+                            <div>
+                                <label for="nama">Nama</label>
+                            </div>
+                            <div>
+                                <input type="text" id="nama" name="nama" class="input input-bordered w-full max-w-xs" placeholder="Masukan Nama">
+                            </div>
+                            <div>
+                                <label for="alamat">Alamat</label>
+                            </div>
+                            <div>
+                                <input type="text" id="alamat" name="alamat" class="input input-bordered w-full max-w-xs" placeholder="Masukan Alamat">
+                            </div>
+                            <div>
+                                <label for="no">No HP</label>
+                            </div>
+                            <div>
+                                <input type="text" id="no" name="no" class="input input-bordered w-full max-w-xs" placeholder="Masukan NO HP">
+                            </div>
+                            <div>
+                                <label for="email">Email</label>
+                            </div>
+                            <div>
+                                <input type="text" id="email" name="email" class="input input-bordered w-full max-w-xs" placeholder="Masukan Email">
+                            </div>
+                        </p>
+                        <div class="card-actions justify-end">
+                            <button id="btn-save-konsumen" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card w-96 bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">Daftar Konsumen</h2>
+                    <p>
+                        <ul id="daftar-konsumen" class="menu">
+                        </ul>
+                    </p>
+                </div>
+            </div>
+                <script>
+                function tambahKonsumen(form) {  
+                    console.log(form);
+                    aplikasiHalamanKonsumen.inputKonsumen(form);
+                    aplikasiHalamanKonsumen.menampilkanHalamanKonsumen();
+                }
 
-        const aplikasiHalamanKonsumen = {
-            konsumen: {
-                index: -1,
-                nama: null,
-                alamat: null,
-                no: null,
-                email: null
-            },
-        daftarKonsumen: [],
-        inputKonsumen: function (form) {
-            this.konsumen.index = form.index.value;
-            this.konsumen.nama = form.nama.value;
-            this.konsumen.alamat = form.alamat.value;
-            this.konsumen.no = form.no.value;
-            this.konsumen.email = form.email.value;
-            
-            if(!this.konsumen.nama) {
-                alert('Nama tidak boleh kosong!');
-                return false;
-            }
-            if(!this.konsumen.alamat) {
-                alert('Alamat tidak boleh kosong!');
-                return false;
-            }
-            if(!this.konsumen.no) {
-                alert('No HP tidak boleh kosong!');
-                return false;
-            }
-            if(!this.konsumen.email) {
-                alert('Email tidak boleh kosong!');
-                return false;
-            }
-            if(this.konsumen.index == -1) {
-                this.daftarKonsumen.push(copy(this.konsumen));
-            } else {
-                this.daftarKonsumen[this.konsumen.index] = copy(this.konsumen)
-            }
-            this.resetFormKonsumen(form);
-        },
-        resetFormKonsumen: function (form) {
-            this.konsumen.nama = null;
-            this.konsumen.alamat = null;
-            this.konsumen.no = null;
-            this.konsumen.email = null;
-            this.konsumen.index = -1;
+                const aplikasiHalamanKonsumen = {
+                    konsumen: {
+                        index: -1,
+                        nama: null,
+                        alamat: null,
+                        no: null,
+                        email: null
+                    },
+                daftarKonsumen: [],
+                inputKonsumen: function (form) {
+                    this.konsumen.index = form.index.value;
+                    this.konsumen.nama = form.nama.value;
+                    this.konsumen.alamat = form.alamat.value;
+                    this.konsumen.no = form.no.value;
+                    this.konsumen.email = form.email.value;
+                    
+                    if(!this.konsumen.nama) {
+                        alert('Nama tidak boleh kosong!');
+                        return false;
+                    }
+                    if(!this.konsumen.alamat) {
+                        alert('Alamat tidak boleh kosong!');
+                        return false;
+                    }
+                    if(!this.konsumen.no) {
+                        alert('No HP tidak boleh kosong!');
+                        return false;
+                    }
+                    if(!this.konsumen.email) {
+                        alert('Email tidak boleh kosong!');
+                        return false;
+                    }
+                    if(this.konsumen.index == -1) {
+                        this.daftarKonsumen.push(copy(this.konsumen));
+                    } else {
+                        this.daftarKonsumen[this.konsumen.index] = copy(this.konsumen)
+                    }
+                    this.resetFormKonsumen(form);
+                },
+                resetFormKonsumen: function (form) {
+                    this.konsumen.nama = null;
+                    this.konsumen.alamat = null;
+                    this.konsumen.no = null;
+                    this.konsumen.email = null;
+                    this.konsumen.index = -1;
 
-            form.nama.value = this.konsumen.nama;
-            form.alamat.value = this.konsumen.alamat;
-            form.no.value = this.konsumen.no;
-            form.email.value = this.konsumen.email;
-            form.index.value = this.konsumen.index;
+                    form.nama.value = this.konsumen.nama;
+                    form.alamat.value = this.konsumen.alamat;
+                    form.no.value = this.konsumen.no;
+                    form.email.value = this.konsumen.email;
+                    form.index.value = this.konsumen.index;
 
-            document.getElementById('btn-save-konsumen').innerHTML = 'Tambah';
-        },
-        menampilkanHalamanKonsumen: function () {
-            const componentHalamanKonsumen = document.getElementById('daftar-konsumen');
-            componentHalamanKonsumen.innerHTML = '';
-            this.daftarKonsumen.forEach((konsumen, index) => {
-                componentHalamanKonsumen.innerHTML += `${konsumen.nama} <br> ${konsumen.alamat} <br> ${konsumen.no} <br> ${konsumen.email} <button onclick="aplikasiHalamanKonsumen.editKonsumen(${index})">Edit</button> <button onclick="aplikasiHalamanKonsumen.hapusKonsumen(${index})">Hapus</button>`;
-            });
-        },
-        hapusKonsumen: function (index) {
-            if(confirm('Apakah anda yakin ingin menghapus data ini ?')) {
-                this.daftarKonsumen.splice(index, 1);
-                this.menampilkanHalamanKonsumen();
-            }
-        },
-            editKonsumen: function (index) {
-            const konsumen = this.daftarKonsumen[index];
-            const form = document.getElementById('form-konsumen');
-                form.nama.value = konsumen.nama;
-                form.alamat.value = konsumen.alamat;
-                form.no.value = konsumen.no;
-                form.email.value = konsumen.email;
-                form.index.value = index;
+                    document.getElementById('btn-save-konsumen').innerHTML = 'Simpan';
+                },
+                menampilkanHalamanKonsumen: function () {
+                    const componentHalamanKonsumen = document.getElementById('daftar-konsumen');
+                    componentHalamanKonsumen.innerHTML = '';
+                    this.daftarKonsumen.forEach((konsumen, index) => {
+                        componentHalamanKonsumen.innerHTML += `
+                        <div class="flex justify-between">
+                            <div> ${konsumen.nama} <br> ${konsumen.alamat} <br> ${konsumen.no} <br> ${konsumen.email} <br>
+                                <div class="card-actions justify-end">
+                                    <button class="btn btn-xs mr-2" onclick="aplikasiHalamanKonsumen.editKonsumen(${index})">Edit</button>
+                                    <button class="btn btn-xs btn-error" onclick="aplikasiHalamanKonsumen.hapusKonsumen(${index})">Hapus</button> 
+                                </div>
+                            </div> 
+                        </div>`;
+                    });
+                },
+                hapusKonsumen: function (index) {
+                    if(confirm('Apakah anda yakin ingin menghapus data ini ?')) {
+                        this.daftarKonsumen.splice(index, 1);
+                        this.menampilkanHalamanKonsumen();
+                    }
+                },
+                    editKonsumen: function (index) {
+                    const konsumen = this.daftarKonsumen[index];
+                    const form = document.getElementById('form-konsumen');
+                        form.nama.value = konsumen.nama;
+                        form.alamat.value = konsumen.alamat;
+                        form.no.value = konsumen.no;
+                        form.email.value = konsumen.email;
+                        form.index.value = index;
 
-             document.getElementById('btn-save-konsumen').innerHTML = 'Edit';
-            }
-        }
-        function copy(obj) {
-        return JSON.parse(JSON.stringify(obj));
-        } 
-    </script>
-</body>
-</html>
+                    document.getElementById('btn-save-konsumen').innerHTML = 'Edit';
+                    }
+                }
+                function copy(obj) {
+                return JSON.parse(JSON.stringify(obj));
+                } 
+            </script>
+        </body>
+        </html>
