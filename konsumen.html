@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="bumblebee">
+<html lang="en" data-theme="lemonade">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -66,103 +66,6 @@
                     </p>
                 </div>
             </div>
-                <script>
-                function tambahKonsumen(form) {  
-                    console.log(form);
-                    aplikasiHalamanKonsumen.inputKonsumen(form);
-                    aplikasiHalamanKonsumen.menampilkanHalamanKonsumen();
-                }
-
-                const aplikasiHalamanKonsumen = {
-                    konsumen: {
-                        index: -1,
-                        nama: null,
-                        alamat: null,
-                        no: null,
-                        email: null
-                    },
-                daftarKonsumen: [],
-                inputKonsumen: function (form) {
-                    this.konsumen.index = form.index.value;
-                    this.konsumen.nama = form.nama.value;
-                    this.konsumen.alamat = form.alamat.value;
-                    this.konsumen.no = form.no.value;
-                    this.konsumen.email = form.email.value;
-                    
-                    if(!this.konsumen.nama) {
-                        alert('Nama tidak boleh kosong!');
-                        return false;
-                    }
-                    if(!this.konsumen.alamat) {
-                        alert('Alamat tidak boleh kosong!');
-                        return false;
-                    }
-                    if(!this.konsumen.no) {
-                        alert('No HP tidak boleh kosong!');
-                        return false;
-                    }
-                    if(!this.konsumen.email) {
-                        alert('Email tidak boleh kosong!');
-                        return false;
-                    }
-                    if(this.konsumen.index == -1) {
-                        this.daftarKonsumen.push(copy(this.konsumen));
-                    } else {
-                        this.daftarKonsumen[this.konsumen.index] = copy(this.konsumen)
-                    }
-                    this.resetFormKonsumen(form);
-                },
-                resetFormKonsumen: function (form) {
-                    this.konsumen.nama = null;
-                    this.konsumen.alamat = null;
-                    this.konsumen.no = null;
-                    this.konsumen.email = null;
-                    this.konsumen.index = -1;
-
-                    form.nama.value = this.konsumen.nama;
-                    form.alamat.value = this.konsumen.alamat;
-                    form.no.value = this.konsumen.no;
-                    form.email.value = this.konsumen.email;
-                    form.index.value = this.konsumen.index;
-
-                    document.getElementById('btn-save-konsumen').innerHTML = 'Simpan';
-                },
-                menampilkanHalamanKonsumen: function () {
-                    const componentHalamanKonsumen = document.getElementById('daftar-konsumen');
-                    componentHalamanKonsumen.innerHTML = '';
-                    this.daftarKonsumen.forEach((konsumen, index) => {
-                        componentHalamanKonsumen.innerHTML += `
-                        <div class="flex justify-between">
-                            <div> ${konsumen.nama} <br> ${konsumen.alamat} <br> ${konsumen.no} <br> ${konsumen.email} <br>
-                                <div class="card-actions justify-end">
-                                    <button class="btn btn-xs mr-2" onclick="aplikasiHalamanKonsumen.editKonsumen(${index})">Edit</button>
-                                    <button class="btn btn-xs btn-error" onclick="aplikasiHalamanKonsumen.hapusKonsumen(${index})">Hapus</button> 
-                                </div>
-                            </div> 
-                        </div>`;
-                    });
-                },
-                hapusKonsumen: function (index) {
-                    if(confirm('Apakah anda yakin ingin menghapus data ini ?')) {
-                        this.daftarKonsumen.splice(index, 1);
-                        this.menampilkanHalamanKonsumen();
-                    }
-                },
-                    editKonsumen: function (index) {
-                    const konsumen = this.daftarKonsumen[index];
-                    const form = document.getElementById('form-konsumen');
-                        form.nama.value = konsumen.nama;
-                        form.alamat.value = konsumen.alamat;
-                        form.no.value = konsumen.no;
-                        form.email.value = konsumen.email;
-                        form.index.value = index;
-
-                    document.getElementById('btn-save-konsumen').innerHTML = 'Edit';
-                    }
-                }
-                function copy(obj) {
-                return JSON.parse(JSON.stringify(obj));
-                } 
-            </script>
+            <script src="aplikasi-daftar-konsumen.js"></script> 
         </body>
         </html>

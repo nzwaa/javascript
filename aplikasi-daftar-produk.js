@@ -4,6 +4,16 @@ function tambahProduk(form) {
     aplikasiDaftarProduk.menampilkanDaftarProduk();
 }
 
+const databaseDaftarProduk = {
+    save(daftarProduk) {
+        localStorage.setItem('daftarProduk', JSON.stringify(daftarProduk));
+    },
+
+    get() {
+        return JSON.parse(localStorage.getItem('daftarProduk'));
+    }
+}
+
 const aplikasiDaftarProduk = {
     produk: {
         index: -1,
@@ -41,11 +51,12 @@ const aplikasiDaftarProduk = {
         }
 
         if(this.produk.index == -1) {
+            this.daftarProduk = this.daftarProduk || [];
             this.daftarProduk.push(copy(this.produk));
         } else {
             this.daftarProduk[this.produk.index] = copy(this.produk)
         }
-
+        databaseDaftarProduk.save(this.daftarProduk);
         this.resetFormProduk(form);
     },
     resetFormProduk: function (form) {
@@ -64,12 +75,19 @@ const aplikasiDaftarProduk = {
         document.getElementById('btn-save-produk').innerHTML = 'Tambah';
     },
     menampilkanDaftarProduk: function () {
+        this.daftarProduk = databaseDaftarProduk.get();
         const componentDaftarProduk = document.getElementById('daftar-produk');
         componentDaftarProduk.innerHTML = '';
+        if (this.daftarProduk === null) {
+            console.log('Tidak ada produk');
+        } else {
         this.daftarProduk.forEach((produk, index) => {
             componentDaftarProduk.innerHTML += `
             <div class="flex justify-between">
-                <div> ${produk.nama} <br> ${produk.harga} <br>  ${produk.stok} <br> <img src="${produk.gambar}" width="200" height="200";> <br>
+                <div> Nama : ${produk.nama} 
+                <br> harga : ${produk.harga} 
+                <br> Stok : ${produk.stok} 
+                <br> <img src="${produk.gambar}" width="200" height="200";> <br>
                     <div class="card-actions justify-end">
                         <button class="btn btn-xs mr-2" onclick="aplikasiDaftarProduk.editProduk(${index})">Edit</button>
                         <button class="btn btn-xs btn-error" onclick="aplikasiDaftarProduk.hapusProduk(${index})">Hapus</button> 
@@ -77,10 +95,12 @@ const aplikasiDaftarProduk = {
                 </div> 
             </div>`;
         });
+    }
     },
     hapusProduk: function (index) {
         if(confirm('Apakah anda yakin ingin menghapus data ini ?')) {
             this.daftarProduk.splice(index, 1);
+            databaseDaftarProduk.save(this.daftarProduk);
             this.menampilkanDaftarProduk();
         }
     },
@@ -100,3 +120,5 @@ const aplikasiDaftarProduk = {
 function copy(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
+
+aplikasiDaftarProduk.menampilkanDaftarProduk();
